@@ -20,6 +20,22 @@ const colors = [
     'yellow'
 ];
 
+let isPaused = false;
+
+document.getElementById('pauseButton').addEventListener('click', togglePause);
+
+function togglePause() {
+    if (isPaused) {
+        isPaused = false;
+        document.getElementById('pauseButton').innerText = 'Pause';
+        update();
+    } else {
+        isPaused = true;
+        document.getElementById('pauseButton').innerText = 'Resume';
+    }
+}
+
+
 function createPiece(type) {
     switch (type) {
         case 'T':
@@ -207,6 +223,8 @@ let dropInterval = 1000;
 
 let lastTime = 0;
 function update(time = 0) {
+    if (isPaused) return;
+    
     const deltaTime = time - lastTime;
     lastTime = time;
 
@@ -232,16 +250,18 @@ const player = {
 };
 
 document.addEventListener('keydown', event => {
-    if (event.keyCode === 37) {
-        playerMove(-1);
-    } else if (event.keyCode === 39) {
-        playerMove(1);
-    } else if (event.keyCode === 40) {
-        playerDrop();
-    } else if (event.keyCode === 81) {
-        playerRotate(-1);
-    } else if (event.keyCode === 87) {
-        playerRotate(1);
+    if (!isPaused) {
+        if (event.keyCode === 37) {
+            playerMove(-1);
+        } else if (event.keyCode === 39) {
+            playerMove(1);
+        } else if (event.keyCode === 40) {
+            playerDrop();
+        } else if (event.keyCode === 81) {
+            playerRotate(-1);
+        } else if (event.keyCode === 87) {
+            playerRotate(1);
+        }
     }
 });
 
