@@ -260,18 +260,20 @@ const ARROW_UP = 38
 
 document.addEventListener('keydown', event => {
     if (!isPaused) {
-        if (event.keyCode === 37) {
-            playerMove(-1);
-        } else if (event.keyCode === 39) {
-            playerMove(1);
-        } else if (event.keyCode === 40) {
-            playerDrop();
-        } else if (event.keyCode === ARROW_UP) {
-            playerRotate(-1);
+        switch (event.key) {
+            case 'ArrowLeft':
+                playerMove(-1); // Move left
+                break;
+            case 'ArrowRight':
+                playerMove(1); // Move right
+                break;
+            case 'ArrowDown':
+                playerDrop(); // Move down
+                break;
+            case 'ArrowUp':
+                playerRotate(-1); // rotate
+                break;
         }
-        //  else if (event.keyCode === W) {
-        //     playerRotate(1);
-        // }
     }
 });
 
