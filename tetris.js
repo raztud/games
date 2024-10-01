@@ -11,13 +11,13 @@ const matrix = [
 // Color of the pieces
 const colors = [
     null,
-    'red',
-    'blue',
-    'green',
-    'purple',
-    'orange',
-    'cyan',
-    'yellow'
+    '#eb5146',
+    '#5cb1f2',
+    '#40c74d',
+    '#64bda2',
+    '#f5ab56',
+    '#dba6ed',
+    '#f2ed57'
 ];
 
 let isPaused = false;
@@ -87,15 +87,20 @@ function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
-                context.fillStyle = colors[value];
-                context.fillRect(x + offset.x, y + offset.y, 1, 1);
+                context.fillStyle = colors[value];  // Fill with piece color
+                context.fillRect(x + offset.x, y + offset.y, 1, 1);  // Draw filled square
+                
+                // Add a thin border around each block (thin line separation)
+                context.strokeStyle = '#7a7777';  // Color of the line (black)
+                context.lineWidth = 0.01;  // Thickness of the line
+                context.strokeRect(x + offset.x, y + offset.y, 1, 1);  // Draw the border
             }
         });
     });
 }
 
 function draw() {
-    context.fillStyle = '#000';
+    context.fillStyle = '#e8e4e3';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     drawMatrix(arena, {x: 0, y: 0});
@@ -224,7 +229,7 @@ let dropInterval = 1000;
 let lastTime = 0;
 function update(time = 0) {
     if (isPaused) return;
-    
+
     const deltaTime = time - lastTime;
     lastTime = time;
 
@@ -249,6 +254,10 @@ const player = {
     score: 0,
 };
 
+const Q = 81
+const W = 87
+const ARROW_UP = 38
+
 document.addEventListener('keydown', event => {
     if (!isPaused) {
         if (event.keyCode === 37) {
@@ -257,11 +266,12 @@ document.addEventListener('keydown', event => {
             playerMove(1);
         } else if (event.keyCode === 40) {
             playerDrop();
-        } else if (event.keyCode === 81) {
+        } else if (event.keyCode === ARROW_UP) {
             playerRotate(-1);
-        } else if (event.keyCode === 87) {
-            playerRotate(1);
         }
+        //  else if (event.keyCode === W) {
+        //     playerRotate(1);
+        // }
     }
 });
 
