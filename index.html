@@ -15,6 +15,30 @@
             text-align: center;
             font-family: Arial, sans-serif;
         }
+
+        #gameContainer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0 auto; /* Center the game container */
+            padding-top: 20px; /* Optional padding for spacing */
+            width: 450px; /* Set a fixed width for the entire container */
+        }
+        #scoreBox {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px; /* Make it a square */
+            margin-right: 10px; /* 10px space from the canvas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightgray; /* Optional background color */
+        }
+        #scoreBox h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
         .button {
           background-color: #04AA6D; /* Green */
           border: none;
@@ -30,13 +54,14 @@
         }
 
 
-        .button5 {
+        .pauseButton {
           background-color: white;
           color: black;
           border: 2px solid #555555;
+          margin-left: 120px;
         }
 
-        .button5:hover {
+        .pauseButton:hover {
           background-color: #555555;
           color: white;
         }
@@ -44,11 +69,16 @@
 </head>
 <body>
     <h1>Tetris</h1>
-    <div>Score: <span id="score">0</span></div>
-    <canvas id="tetris" width="320" height="640"></canvas>
-    <div>&nbsp;</div>
     
-    <button id="pauseButton" class="button button5">Pause</button>
+
+    <div id="gameContainer">
+        <div id="scoreBox">
+            <h3 id="score">0</h3> <!-- Score is displayed in the center -->
+        </div>
+        <canvas id="tetris" width="320" height="640"></canvas>
+    </div>
+    
+    <button id="pauseButton" class="button pauseButton">Pause</button>
     <div>&nbsp;</div>
     <div><b>Controls:</b> Arrow keys are used to move pieces left, right, or down. 'Q' rotates left, and 'W' rotates right.</div>
     <script src="tetris.js"></script>
